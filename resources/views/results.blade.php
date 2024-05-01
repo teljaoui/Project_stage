@@ -45,7 +45,7 @@
                                 <td class="d-flex">
                                     <a href="/removeProd/{{ $item->id }}" class="btn btn-danger delete"><i
                                             class="fa-solid fa-trash"></i></a>
-                                    <a href="/update"  class="btn  btn-info mx-1"><i
+                                    <a href="/update/{{ $item->id }}"  class="btn  btn-info mx-1"><i
                                             class="fa-solid fa-pen-to-square"></i></a>
                                 </td>
                             </tr>

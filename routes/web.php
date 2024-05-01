@@ -14,3 +14,5 @@ Route::post('/produit/search', [Stock::class , 'search'])->name('produit.search'
 Route::post('/new_catégorie', [Stock::class , 'new_catégorie']);
 Route::post('/new_fournisseur', [Stock::class , 'new_fournisseur']);
 Route::post('new_product', [Stock::class , 'new_product']);
+Route::get('/update/{id}', [Stock::class , 'update']);
+Route::post('/update_produit' , [Stock::class , 'update_produit']);

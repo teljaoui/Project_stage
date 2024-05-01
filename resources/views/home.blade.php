@@ -35,7 +35,12 @@
             <div class="alert alert-success">
                 {{ session('success') }}
             </div>
+        @elseif(session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
         @endif
+
         <h4>List des Produits</h4>
         <div class="row m-4">
             <div class="col-12">
@@ -65,13 +70,16 @@
                                 <td class="d-flex">
                                     <a href="/removeProd/{{ $produit->id }}" class="btn btn-danger delete"><i
                                             class="fa-solid fa-trash"></i></a>
-                                    <a href="/update" id="remove" class="btn btn-info mx-1"><i
+                                    <a href="/update/{{ $produit->id }}" id="remove" class="btn btn-info mx-1"><i
                                             class="fa-solid fa-pen-to-square"></i></a>
                                 </td>
                             </tr>
                         @endforeach
                     </tbody>
                 </table>
+            </div>
+            <div class="col-12">
+                <span class="text-center">{{ $produits->links() }}</span>
             </div>
         </div>
     </div>

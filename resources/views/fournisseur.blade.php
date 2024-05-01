@@ -41,6 +41,10 @@
                     <div class="alert alert-success">
                         {{ session('success') }}
                     </div>
+                @elseif(session('error'))
+                    <div class="alert alert-danger">
+                        {{ session('error') }}
+                    </div>
                 @endif
                 <table class="tabel table table-bordered my-4">
                     <thead>
@@ -65,6 +69,8 @@
                         @endforeach
                     </tbody>
                 </table>
+                <span class="text-center">{{ $fournisseurs->links() }}</span>
+
             </div>
         </div>
     </div>
