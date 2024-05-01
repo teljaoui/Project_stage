@@ -6,10 +6,20 @@ document.querySelectorAll(".delete").forEach(function (button) {
     });
 });
 
-const form = document.querySelector('.container table form');
-const valide = document.querySelector('.afficherform');
+const forms = document.querySelectorAll('.container table form');
+const valides = document.querySelectorAll('.afficherform');
+const resets = document.querySelectorAll('.reset');
 
-valide.addEventListener('click', function() {
-    valide.style.display = "none"
-    form.style.display = "flex";
+valides.forEach(function (valide, index) {
+    valide.addEventListener("click", function () {
+        forms[index].style.display = "flex";
+        valide.style.display = "none";
+    });
+});
+
+resets.forEach(function (reset, index) {
+    reset.addEventListener('click', function () {
+        forms[index].style.display = "none";
+        valides[index].style.display = "";
+    });
 });

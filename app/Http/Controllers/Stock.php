@@ -11,7 +11,7 @@ class Stock extends Controller
 {
     public function home()
     {
-        $produits = Produits::paginate(6);
+        $produits = Produits::paginate(5);
         return view('home', compact('produits'));
     }
     public function Fournisseur()
@@ -94,7 +94,7 @@ class Stock extends Controller
     public function new_product(Request $request)
     {
         try {
-            Produits::create([
+            $produit = Produits::create([
                 'name' => $request->get('name'),
                 'description' => $request->get('description'),
                 'price' => $request->get('price'),
@@ -102,8 +102,8 @@ class Stock extends Controller
                 'fournisseur_id' => $request->get('fournisseur_id'),
                 'categorie_id' => $request->get('categorie_id')
             ]);
-
-            session()->flash('success', 'Produit ajouté avec succès.');
+            $matricule = $produit->id;
+            session()->flash('success', 'Produit ajouté avec succès. "Matricule du produit" : ' . '{' . $matricule . '}'  );
         } catch (\Exception $e) {
             session()->flash('error', 'Une erreur est survenue lors de l\'ajout du produit. Assurez-vous de remplir tous les champs');
         }

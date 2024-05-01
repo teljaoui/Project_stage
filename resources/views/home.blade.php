@@ -71,24 +71,32 @@
                                 <td>{{ $produit->quantité }}</td>
                                 <td>{{ $produit->categorie->name }}</td>
                                 <td>{{ $produit->fournisseur->name }}</td>
-                                <td class="d-flex">
-                                    <a href="/removeProd/{{ $produit->id }}" class="btn btn-danger delete">
-                                        <i class="fa-solid fa-trash"></i>
-                                    </a>
-                                    <a href="/update/{{ $produit->id }}" id="remove" class="btn btn-info mx-1">
-                                        <i class="fa-solid fa-pen-to-square"></i>
-                                    </a>
-                                    <button class="btn btn-success afficherform" onclick="affciherform()">
-                                        <i class="fa-solid fa-magnifying-glass-minus"></i>
-                                    </button>
-                                    <form action="/update_quant" method="POST" class="mx-1">
-                                        @csrf
-                                        <input type="hidden" name="id" value="{{ $produit->id }}">
-                                        <input type="number" class="form-control" name="quantité_vendu" min="1"
-                                            placeholder="Entrez le nombre de ventes" required>
-                                        <button type="submit" class="valider"><i
-                                                class="fa-solid fa-check"></i></button>
-                                    </form>
+                                <td>
+                                    <div class="d-flex">
+                                        <a href="/removeProd/{{ $produit->id }}" class="btn btn-danger delete">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </a>
+                                        <a href="/update/{{ $produit->id }}" id="remove" class="btn btn-info mx-1">
+                                            <i class="fa-solid fa-pen-to-square"></i>
+                                        </a>
+                                        <button class="btn btn-success afficherform" onclick="affciherform()">
+                                            <i class="fa-solid fa-magnifying-glass-minus"></i>
+                                        </button>
+                                    </div>
+                                    <div>
+                                        <form action="/update_quant" method="POST" class="py-4">
+                                            @csrf
+                                            <input type="hidden" name="id" value="{{ $produit->id }}">
+                                            <input type="number" class="form-control" name="quantité_vendu"
+                                                min="0" placeholder="Entrez le nombre de ventes" required>
+                                            <button type="submit" class="valider"><i
+                                                    class="fa-solid fa-check"></i></button>
+                                            <button type="reset" class="reset"><i
+                                                    class="fa-solid fa-xmark"></i></button>
+
+                                        </form>
+                                    </div>
+
                                 </td>
                             </tr>
                         @endforeach
