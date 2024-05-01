@@ -5,3 +5,11 @@ document.querySelectorAll(".delete").forEach(function (button) {
         }
     });
 });
+
+const form = document.querySelector('.container table form');
+const valide = document.querySelector('.afficherform');
+
+valide.addEventListener('click', function() {
+    valide.style.display = "none"
+    form.style.display = "flex";
+});

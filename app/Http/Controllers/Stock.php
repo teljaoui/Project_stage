@@ -137,4 +137,30 @@ class Stock extends Controller
         }
         return redirect('/');
     }
+    public function update_quant(Request $request)
+    {
+        $produit = Produits::find($request->get('id'));
+        if (!$produit) {
+            return redirect('/')->with('error', 'Produit non trouvé.');
+        }
+        try {
+            $ancienne = $produit->quantité;
+            $quantité_vendu = $request->get('quantité_vendu');
+            $newquantité = $ancienne - $quantité_vendu;
+            $produit->update(
+                [
+                    'quantité' => $newquantité
+                ]
+            );
+            if ($newquantité <= 0) {
+                $produit->delete();
+                session()->flash('warning', 'La quantité de produit est inférieure ou égale à 0, le produit est donc supprimé');
+            } else {
+                session()->flash('success', 'Quantité du produit mise à jour avec succès.');
+            }
+        } catch (\Exception $e) {
+            session()->flash('error', 'Une erreur est survenue lors de la mise à jour de la quantité du produit.');
+        }
+        return redirect('/');
+    }
 }

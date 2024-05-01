@@ -43,10 +43,23 @@
                                 <td>{{ $item->categorie->name }}</td>
                                 <td>{{ $item->fournisseur->name }}</td>
                                 <td class="d-flex">
-                                    <a href="/removeProd/{{ $item->id }}" class="btn btn-danger delete"><i
-                                            class="fa-solid fa-trash"></i></a>
-                                    <a href="/update/{{ $item->id }}"  class="btn  btn-info mx-1"><i
-                                            class="fa-solid fa-pen-to-square"></i></a>
+                                    <a href="/removeProd/{{$item->id }}" class="btn btn-danger delete">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </a>
+                                    <a href="/update/{{ $item->id }}" id="remove" class="btn btn-info mx-1">
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                    </a>
+                                    <button class="btn btn-success afficherform" onclick="affciherform()">
+                                        <i class="fa-solid fa-magnifying-glass-minus"></i>
+                                    </button>
+                                    <form action="/update_quant" method="POST" class="mx-1">
+                                        @csrf
+                                        <input type="hidden" name="id" value="{{ $item->id }}">
+                                        <input type="number" class="form-control" min="1" name="quantité_vendu"
+                                            placeholder="Entrez le nombre de ventes" required>
+                                        <button type="submit" class="valider"><i
+                                                class="fa-solid fa-check"></i></button>
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach

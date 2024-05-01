@@ -16,3 +16,4 @@ Route::post('/new_fournisseur', [Stock::class , 'new_fournisseur']);
 Route::post('new_product', [Stock::class , 'new_product']);
 Route::get('/update/{id}', [Stock::class , 'update']);
 Route::post('/update_produit' , [Stock::class , 'update_produit']);
+Route::post('/update_quant', [Stock::class , 'update_quant']);

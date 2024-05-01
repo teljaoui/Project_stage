@@ -10,9 +10,11 @@
     padding: 0;
     font-family: 'Poppins', sans-serif;
 }
-.gap{
+
+.gap {
     gap: 15px;
 }
+
 .container {
     margin-top: 20px;
 }
@@ -22,7 +24,8 @@
     font-weight: 550;
     color: var(--color-070F2B);
 }
-.container h4{
+
+.container h4 {
     font-size: 20px;
     color: var(--color-9290C3);
     font-weight: 500;
@@ -44,7 +47,9 @@
     margin-left: 5px;
     font-weight: 530;
 }
-.submit {
+
+.submit,
+.valider {
     border: 0px;
     background-color: var(--color-1B1A55);
     border-radius: 10px;
@@ -56,9 +61,15 @@
     font-weight: 550;
 }
 
-.search button:hover ,.submit:hover {
+.search button:hover,
+.submit:hover {
     background: var(--color-535C91);
     letter-spacing: 1.4px;
+}
+
+.valider:hover {
+    background: var(--color-535C91);
+    letter-spacing: 0px !important;
 }
 
 .lien a {
@@ -74,11 +85,17 @@
     color: #fff;
     letter-spacing: 0.4px;
 }
-.home{
+
+.home {
     color: var(--color-1B1A55);
     text-decoration: none;
     transition: 0.3s ease;
 }
-.home:hover{
+
+.home:hover {
     color: var(--color-9290C3);
+}
+
+.container table form {
+    display: none;
 }
