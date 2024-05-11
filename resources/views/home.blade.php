@@ -20,7 +20,7 @@
             <div class="search d-flex">
                 <form action="{{ route('produit.search') }}" method="POST" class="d-flex">
                     @csrf
-                    <input type="number" name="id" class="form-control" placeholder="Matricule">
+                    <input type="number" name="id" min="1" class="form-control" placeholder="Matricule">
                     <button type="submit">Recherche</button>
                 </form>
 
@@ -76,7 +76,7 @@
                                         <a href="/removeProd/{{ $produit->id }}" class="btn btn-danger delete">
                                             <i class="fa-solid fa-trash"></i>
                                         </a>
-                                        <a href="/update/{{ $produit->id }}" id="remove" class="btn btn-info mx-1">
+                                        <a href="/update/{{ $produit->id }}" class="btn btn-info mx-1">
                                             <i class="fa-solid fa-pen-to-square"></i>
                                         </a>
                                         <button class="btn btn-success afficherform" onclick="affciherform()">
@@ -108,6 +108,11 @@
             </div>
         </div>
     </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+    </script>
     <script src="/js/main.js"></script>
 </body>
 
