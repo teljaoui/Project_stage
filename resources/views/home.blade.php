@@ -29,6 +29,8 @@
                 <a href="/Produits" class="btn">Ajouter des Produits</a>
                 <a href="/fournisseur" class="btn">Ajouter un Fournisseur</a>
                 <a href="/Catégorie" class="btn">Ajouter Catégorie</a>
+                <a href="/loginUp" class="btn">Modifier mote de passe</a>
+                <a href="/logout" class="btn">Se déconnecter</a>
             </div>
         </div>
         @if (session('success'))
