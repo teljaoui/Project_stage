@@ -14,7 +14,8 @@ class Produits extends Model
         'price',
         'quantité',
         'fournisseur_id',
-        'categorie_id'
+        'categorie_id',
+        'stock'
     ];
     public function fournisseur()
     {

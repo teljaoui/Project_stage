@@ -27,6 +27,9 @@
             </div>
             <div class="lien">
                 <a href="/Produits" class="btn">Ajouter des Produits</a>
+                @if ($produitout)
+                  <a href="/outstock" class="btn">Product Out of stock <span class="outstock">{{$produitout}}</span></a> 
+                @endif
                 <a href="/fournisseur" class="btn">Ajouter un Fournisseur</a>
                 <a href="/Catégorie" class="btn">Ajouter Catégorie</a>
                 <a href="/loginUp" class="btn">Modifier mote de passe</a>

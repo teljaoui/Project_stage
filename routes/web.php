@@ -24,3 +24,4 @@ Route::get('/loginUp' , [loginController::class , 'loginUp']);
 Route::post('/login_post' , [loginController::class , 'login_post']);
 Route::get('/logout' , [loginController::class , 'logout']);
 Route::post('/password_up' , [loginController::class , 'password_up']);
+Route::get('/outstock' , [Stock::class , 'outstock']);

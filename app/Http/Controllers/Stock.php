@@ -11,8 +11,9 @@ class Stock extends Controller
 {
     public function home()
     {
-        $produits = Produits::paginate(5);
-        return view('home', compact('produits'));
+        $produits = Produits::where( "stock" , "!=" , 0)->paginate(5);
+        $produitout = Produits::where('stock' , '==' , 0)->count(); 
+        return view('home', compact('produits' , 'produitout'));
     }
     public function Fournisseur()
     {
@@ -120,17 +121,33 @@ class Stock extends Controller
     public function update_produit(Request $request)
     {
         $produit = Produits::find($request->get('id'));
+        $quantité = $request->get('quantité');
         try {
-            $produit->update(
-                [
-                    'name' => $request->get('name'),
-                    'description' => $request->get('description'),
-                    'price' => $request->get('price'),
-                    'quantité' => $request->get('quantité'),
-                    'fournisseur_id' => $request->get('fournisseur_id'),
-                    'categorie_id' => $request->get('categorie_id')
-                ]
-            );
+            if($quantité > 0 ){
+                $produit->update(
+                    [
+                        'name' => $request->get('name'),
+                        'description' => $request->get('description'),
+                        'price' => $request->get('price'),
+                        'quantité' => $request->get('quantité'),
+                        'fournisseur_id' => $request->get('fournisseur_id'),
+                        'categorie_id' => $request->get('categorie_id'),
+                        'stock' => 1
+                    ]
+                );
+            }else{
+                $produit->update(
+                    [
+                        'name' => $request->get('name'),
+                        'description' => $request->get('description'),
+                        'price' => $request->get('price'),
+                        'quantité' => $request->get('quantité'),
+                        'fournisseur_id' => $request->get('fournisseur_id'),
+                        'categorie_id' => $request->get('categorie_id'),
+                        'stock' => 0
+                    ]
+                );
+            }
             session()->flash('success', 'Produit Modifié avec succès.');
         } catch (\Exception $e) {
             session()->flash('error', 'Une erreur est survenue lors de Modifieé du produit.');
@@ -143,24 +160,39 @@ class Stock extends Controller
         if (!$produit) {
             return redirect('/')->with('error', 'Produit non trouvé.');
         }
+    
         try {
             $ancienne = $produit->quantité;
             $quantité_vendu = $request->get('quantité_vendu');
             $newquantité = $ancienne - $quantité_vendu;
-            $produit->update(
-                [
-                    'quantité' => $newquantité
-                ]
-            );
-            if ($newquantité <= 0) {
-                $produit->delete();
-                session()->flash('warning', 'La quantité de produit est inférieure ou égale à 0, le produit est donc supprimé');
+    
+            if ($quantité_vendu > $ancienne) {
+                session()->flash('error', 'La quantité vendue est supérieure au stock disponible.');
+                return redirect('/'); // Arrêter l'exécution si la condition est vraie
+            } 
+            
+            $produit->update([
+                'quantité' => $newquantité
+            ]);
+    
+            if ($newquantité == 0) {
+                $produit->update([
+                    'stock' => 0 
+                ]);
+                session()->flash('warning', 'La quantité de produit est égale à 0, le produit est ajouté à la liste des produits en rupture de stock.');
             } else {
                 session()->flash('success', 'Quantité du produit mise à jour avec succès.');
             }
         } catch (\Exception $e) {
             session()->flash('error', 'Une erreur est survenue lors de la mise à jour de la quantité du produit.');
         }
+    
         return redirect('/');
+    }
+    
+    public function outstock(){
+        $produits = Produits::where("stock" , "==" , 0)->paginate(5);
+        $fournisseurs = Fournisseurs::all();
+        return view('outstock' , compact('produits' ));
     }
 }

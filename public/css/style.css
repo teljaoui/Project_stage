@@ -108,3 +108,12 @@
     display: none;
     width: 347px !important;
 }
+
+.outstock{
+    position: relative;
+    z-index: 111;
+    padding: 2px 5px;
+    border-radius: 50%;
+    background-color: red;
+    font-weight: 700;
+}
