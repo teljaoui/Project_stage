@@ -67,8 +67,10 @@ class Stock extends Controller
     {
         $matricule = $request->input('id');
 
-        $produit = Produits::where('id', 'like', "%$matricule%")->get();
-
+        $produit = Produits::find($matricule);
+        if (!$produit) {
+            return redirect()->back()->with('error', 'Produit non trouvé.');
+        }
         return view('results', compact('produit'));
     }
     public function new_catégorie(Request $request)
@@ -101,7 +103,8 @@ class Stock extends Controller
                 'price' => $request->get('price'),
                 'quantité' => $request->get('quantité'),
                 'fournisseur_id' => $request->get('fournisseur_id'),
-                'categorie_id' => $request->get('categorie_id')
+                'categorie_id' => $request->get('categorie_id'),
+                'stock'=>1
             ]);
             $matricule = $produit->id;
             session()->flash('success', 'Produit ajouté avec succès. "Matricule du produit" : ' . '{' . $matricule . '}'  );

@@ -70,7 +70,7 @@
                 </table>
             </div>
             <div class="col-12">
-                <span class="text-center"></span>
+                <span class="text-center">{{$produits->links()}}</span>
             </div>
         </div>
 
